@@ -1,10 +1,6 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
-public class Main {
+public class Day1 {
   public static void main(String[] args) throws IOException {
 //        String urlName = "https://adventofcode.com/2015/day/1/input";
 //        String text = getTextFromUrl(urlName);
