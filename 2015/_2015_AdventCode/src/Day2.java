@@ -13,8 +13,39 @@ public class Day2 {
     for (String line : linesOfSource) {
       presents.add(extractNumbersFromLines(line));
     }
-    System.out.println(feetOfWrappingPaper(presents));
+    System.out.println("paper " +feetOfWrappingPaper(presents));
 
+    System.out.println("ribbon " + feetOfRibbon(presents));
+  }
+
+  private static int feetOfRibbon(List<int[]> boxes) {
+    int ribbon = 0;
+    for (int[] box : boxes) {
+      ribbon += ribbonPerBox(box);
+    }
+    return ribbon;
+  }
+
+  public static int ribbonPerBox(int[] box) {
+    int l = box[0];
+    int w = box[1];
+    int h = box[2];
+    // find the 2 smallest number in one box
+    int smallest = Math.min(l, Math.min(w, h));
+    int secondSmallest;
+    if (smallest == l) {
+      secondSmallest = Math.min(w, h);
+    } else if (smallest == w) {
+      secondSmallest = Math.min(l, h);
+    } else {
+      secondSmallest = Math.min(l, w);
+    }
+    //duplicate both and add them together
+    int perimeter = 2 * (smallest + secondSmallest);
+    // add the multiplication of the 3 numbers
+    int volume = l * w * h;
+
+    return perimeter + volume;
   }
 
   public static int feetOfWrappingPaper(List<int[]> boxes) {
@@ -25,10 +56,10 @@ public class Day2 {
     return paper;
   }
 
-  public static int paperPerBox(int[] surface) {
-    int l = surface[0];
-    int w = surface[1];
-    int h = surface[2];
+  public static int paperPerBox(int[] box) {
+    int l = box[0];
+    int w = box[1];
+    int h = box[2];
     //2*l*w + 2*w*h + 2*h*l + the smallest of the preceding 3
 
     return (2 * l * w) + (2 * w * h) + (2 * h * l) + smallest(l, w, h);
